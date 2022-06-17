@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <script>
+            window.addEventListener('load', function(){
+                window.chart = new CanvasJS.Chart("chartContainer",
+                {
+                    data: [{
+                        type: "line",
+                        dataPoints: [],
+                        lineThickness: 5
+                    }],
+                    backgroundColor: null,
+                    axisY: {
+                        interval: 10,
+                        labelFontSize: 16,
+                        labelFontWeight: "bold"
+                    }
+                })
+            });
+            window.addEventListener('message', (event) => {
+                window.chart.options.data[0].dataPoints = window.chart.options.data[0].dataPoints.slice(-10)
+                window.chart.options.data[0].dataPoints.push({x: event.data.index, y: event.data.frames})
+                window.chart.render();
+                document.getElementById("fps").innerText = event.data.frames
+            });
+        </script>
+    </head>
+    <body >
+        <div id="chartContainer" style="width: 25%; height: 25%; position: absolute; bottom: 10px; right: 10px;"></div>
+        <span id="fps" style="position: absolute; bottom: calc(25% - 30px); right: 20px; font-size: 24; font-weight: bold;"></span>
+    </body>
+</html>
