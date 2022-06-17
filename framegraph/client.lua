@@ -22,7 +22,7 @@ RegisterCommand("fpsavg", function(_, args, _)
         TriggerEvent('chat:addMessage', {
             color = { 255, 0, 0},
             multiline = false,
-            args = { "FrameGraph", "`"..args[1].."` is not a valid number."}
+            args = { "FrameGraph", "`"..tostring(args[1]).."` is not a valid number."}
         })
         return
     end
