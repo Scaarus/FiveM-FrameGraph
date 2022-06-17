@@ -19,10 +19,16 @@
                 })
             });
             window.addEventListener('message', (event) => {
-                window.chart.options.data[0].dataPoints = window.chart.options.data[0].dataPoints.slice(-10)
-                window.chart.options.data[0].dataPoints.push({x: event.data.index, y: event.data.frames})
-                window.chart.render();
-                document.getElementById("fps").innerText = event.data.frames
+                switch (event.data.type) {
+                    case "update":
+                        window.chart.options.data[0].dataPoints = window.chart.options.data[0].dataPoints.slice(-10)
+                        window.chart.options.data[0].dataPoints.push({x: event.data.index, y: event.data.frames})
+                        window.chart.render();
+                        document.getElementById("fps").innerText = event.data.frames
+                        break;
+                    default:
+                        break;
+                }
             });
         </script>
     </head>

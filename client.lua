@@ -4,6 +4,7 @@ Citizen.CreateThread(function()
         FrameCount = GetFrameCount()
         Citizen.Wait(1000)
         SendNUIMessage({
+            type = "update",
             index = Index,
             frames = GetFrameCount() - FrameCount
         })
